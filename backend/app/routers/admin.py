@@ -1,3 +1,7 @@
+@router.get("/users")
+def list_admin_users(db: Session = Depends(database.get_db)):
+    users = db.query(models.User).all()
+    return [{"username": u.username} for u in users]
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
